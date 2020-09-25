@@ -9,17 +9,17 @@
 </head>
 <body>
 <div id="app" >
-    <p v-show="isShowBase">
+    <p >
         Шифротекст: {{text}}
 
     </p>
 
-    <p v-show="isShowBase">
+    <p >
         База: {{base.join(", ")}}
         <button @click="removeBase">Удалить элемент</button>
     </p>
-
-    <input v-model="text">
+    <input type="checkbox" v-model="isDecrypt"><label >Расшифровать?</label> <br>
+    <input v-model="text" @input="calcKeyIndex">
     <input v-model="baseInput" @input="kek">
     <h3>{{answer}}</h3>
 

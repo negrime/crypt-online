@@ -4,10 +4,11 @@ var vm = new Vue({
         alphabet: "абвгдежзийклмнопрстуфхцчшщъыьэюя",
         base: [],
         key: "",
-        text: "вдээшйтг",
+        text: "",
         answer: "",
         baseInput: "",
-        textInput: ""
+        textInput: "",
+        isDecrypt: true
     },
     computed: {
       isShowBase: function () {
@@ -54,34 +55,69 @@ var vm = new Vue({
             console.log(result);
             this.answer = result;
         },
+        encryption: function(text, key){
+            let result = "";
+            let k=0;
+            let x=0;
+            let z=0;
+            while(key.length < text.length) {
+                key += key;
+                if (key.length > text.length) {key = key.substr(0,text.length);}
+            }
+
+            for (let i = 0; i < text.length; i++){
+                for (let id = 0; id < this.alphabet.length; id++){
+                    if (key[i] == this.alphabet[id]) k = id;
+                    if (text[i] == this.alphabet[id]) x = id;
+                    z = (x + k) % this.alphabet.length;
+                }
+                result += this.alphabet[z];
+            }
+            console.log(result);
+            this.answer = result;
+        },
+        // static public string Encryption(string source, string key)
+// {
+//     res = string.Empty;
+//
+//     while (key.Length < source.Length)
+//     {
+//         key += key;
+//         if (key.Length > source.Length) key = key.Remove(source.Length);
+//     }
+//     for (int i = 0; i < source.Length; i++)
+//     {
+//         for (int id = 0; id < alf.Length; id++)
+//         {
+//             if (key[i] == alf[id]) k = id;
+//             if (source[i] == alf[id]) x = id;
+//             z = (x + k) % alf.Length;
+//         }
+//         res += alf[z];
+//     }
+//     return res;
+// }
         calcKeyIndex: function () {
-            this.key = "";
-            this.base.forEach(el => {
-                this.key +=  this.alphabet[el];
-            })
-            if (this.key.length < 1) return;
-            this.decryption(this.text, this.key);
+            if (this.isDecrypt) {
+                this.key = "";
+                this.base.forEach(el => {
+                    this.key += this.alphabet[el];
+                })
+                if (this.key.length < 1) return;
+                this.decryption(this.text, this.key);
+            }
+            else {
+                this.key = "";
+                this.base.forEach(el => {
+                    this.key += this.alphabet[el];
+                })
+                if (this.text.length < 1 || this.base.length < 1) return;
+                this.encryption(this.text, this.key);
+            }
         }
     }
 })
 
 
 
-// res = string.Empty;
-//
-// while (key.Length < source.Length)
-// {
-//     key += key;
-//     if (key.Length > source.Length) key = key.Remove(source.Length);
-// }
-// for (int i = 0; i < source.Length; i++)
-// {
-//     for (int id = 0; id < alf.Length; id++)
-//     {
-//         if (key[i] == alf[id]) k = id;
-//         if (source[i] == alf[id]) x = id;
-//         z = ((source[i] - key[i]) + alf.Length) % alf.Length;
-//     }
-//     res += alf[z];
-// }
-// return res;
+
