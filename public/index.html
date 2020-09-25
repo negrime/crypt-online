@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app" >
+    <p v-show="isShowBase">
+        Шифротекст: {{text}}
+
+    </p>
+
+    <p v-show="isShowBase">
+        База: {{base.join(", ")}}
+        <button @click="removeBase">Удалить элемент</button>
+    </p>
+
+    <input v-model="text">
+    <input v-model="baseInput" @input="kek">
+    <h3>{{answer}}</h3>
+
+</div>
+</body>
+<script src="main.js"></script>
+</html>
