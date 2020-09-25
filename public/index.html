@@ -19,8 +19,8 @@
         <button @click="removeBase">Удалить элемент</button>
     </p>
     <input type="checkbox" v-model="isDecrypt"><label >Расшифровать?</label> <br>
-    <input v-model="text" @input="calcKeyIndex">
-    <input v-model="baseInput" @input="kek">
+    <input v-model="text" placeholder="текст" @input="calcKeyIndex">
+    <input v-model="baseInput" placeholder="базу через пробел" @input="kek">
     <h3>{{answer}}</h3>
 
 </div>
